@@ -1,0 +1,16 @@
+{
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "rootDir": "../",
+    "outDir": "../dist",
+    "composite": true,
+    "declaration": true
+  },
+  "include": [
+    "../test/**/*.ts",
+    "../test/*.ts",
+    "../test/_*.ts",
+    "../declarations/*.d.ts"
+  ],
+  "references": [{"path":  "../src"}]
+}
