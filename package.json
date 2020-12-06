@@ -6,7 +6,7 @@
   "scripts": {
     "clear": "rm -rf dist",
     "compile": "tsc --build",
-    "test": "npm run compile && cd __example__ && node ../dist/src/index.js"
+    "test": "npm run compile && cd __example__ && node ../dist/src/index.js && node ./dist/testFile.js"
   },
   "author": "",
   "license": "ISC",

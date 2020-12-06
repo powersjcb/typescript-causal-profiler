@@ -13,7 +13,7 @@ export class StatsCollector {
   }
 
   // compile-time only
-  instrument(reference: string): void {
+  trackInstrumentation(reference: string): void {
     this.data[reference] = 0;
   }
 
@@ -37,4 +37,3 @@ export class StatsCollector {
 export const instrument = (collector: StatsCollector, reference: string) => () => {
   collector.increment(reference);
 };
-

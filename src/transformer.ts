@@ -48,7 +48,7 @@ const referenceFor = (n: ts.Node): string => {
 const transformNode = (collector: StatsCollector, node: ts.Node): ts.Node => {
   if (ts.isCallExpression(node)) {
     // console.log(referenceFor(node), ts.isCallExpression(node), node)
-    collector.instrument(referenceFor(node));
+    collector.trackInstrumentation(referenceFor(node));
     // note: https://github.com/microsoft/TypeScript/issues/40507
     // noinspection JSDeprecatedSymbols
     const instrumentationStatement = ts.factory.createExpressionStatement(ts.factory.createCallExpression(
