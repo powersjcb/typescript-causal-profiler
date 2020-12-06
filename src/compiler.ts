@@ -46,7 +46,7 @@ export const compiler = (configFilePath: string, collector: StatsCollector) => {
         const {line, character} = diagnostic.file.getLineAndCharacterOfPosition(diagnostic.start);
         msg = `${diagnostic.file.fileName} (${line + 1},${character + 1}): ${msg}`;
       }
-      console.error(msg);
+      console.error('Error: ', msg);
     });
 
   const exitCode = emitResult.emitSkipped ? 1 : 0;

@@ -15,8 +15,6 @@ export const instrumentTransformerFactory = (collector: StatsCollector) => (cont
         return node;
       }
       ts.visitNode(sourceFile, visitor)
-      const last = replacements['/Users/jpowers/workspace/typescript-causal-profiler/__example__/testFile.ts [142-150] func1()'];
-      console.log(last)
       const replacer = (node: ts.Node): ts.Node => {
         const replacement = replacements[referenceFor(node)]
         if (replacement) {
@@ -40,6 +38,7 @@ const referenceFor = (n: ts.Node): string => {
   return `${n.getSourceFile().fileName} [${n.pos}-${n.end}] ${n.getText()}`;
 };
 
+// todo: determine if this is necessary
 // function isRequireContextExpression(node: ts.Expression) {
 //   return (
 //     ts.isPropertyAccessExpression(node) &&
@@ -52,7 +51,6 @@ const referenceFor = (n: ts.Node): string => {
 
 const transformNode = (collector: StatsCollector, node: ts.Node): ts.Node => {
   if (ts.isCallExpression(node)) {
-    // console.log(referenceFor(node), ts.isCallExpression(node), node)
     collector.trackInstrumentation(referenceFor(node));
     // note: https://github.com/microsoft/TypeScript/issues/40507
     // noinspection JSDeprecatedSymbols

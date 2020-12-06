@@ -8,4 +8,4 @@ const collector = new StatsCollector()
 
 compiler('./tsconfig.json', collector)
 
-console.log(collector.getReferences())
+console.log('Instrumented Calls: ' + collector.getReferences().length)
