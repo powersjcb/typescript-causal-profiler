@@ -34,6 +34,3 @@ export class StatsCollector {
   };
 };
 
-export const instrument = (collector: StatsCollector, reference: string) => () => {
-  collector.increment(reference);
-};
