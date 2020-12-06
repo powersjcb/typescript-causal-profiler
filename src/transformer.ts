@@ -11,16 +11,21 @@ export const instrumentTransformerFactory = (collector: StatsCollector) => (cont
         if (maybeUpdated !== node) {
           replacements[referenceFor(node)] = maybeUpdated;
         }
-        return ts.visitEachChild(node, visitor, context);
+        ts.visitEachChild(node, visitor, context);
+        return node;
       }
       ts.visitNode(sourceFile, visitor)
+      const last = replacements['/Users/jpowers/workspace/typescript-causal-profiler/__example__/testFile.ts [142-150] func1()'];
+      console.log(last)
       const replacer = (node: ts.Node): ts.Node => {
         const replacement = replacements[referenceFor(node)]
         if (replacement) {
           delete replacements[referenceFor(node)]
-          return ts.visitEachChild(replacement, replacer, context)
+          ts.visitEachChild(replacement, replacer, context)
+          return replacement;
         }
-        return ts.visitEachChild(node, replacer, context);
+        ts.visitEachChild(node, replacer, context);
+        return node;
       }
       return ts.visitNode(sourceFile, replacer)
     },
