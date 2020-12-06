@@ -1,9 +1,10 @@
 import * as ts from 'typescript';
 import { sys } from 'typescript';
-import { transformerFactory } from './transformer';
+import {StatsCollector} from './lib/instrumentation';
+import {instrumentTransformerFactory} from './transformer';
 
 // load default configs from file and then add this customer transformer
-export const compiler = (configFilePath: string) => {
+export const compiler = (configFilePath: string, collector: StatsCollector) => {
   // tslint:disable-next-line no-any
   const host: ts.ParseConfigFileHost = ts.sys as any;
   // Fix after https://github.com/Microsoft/TypeScript/issues/18217
@@ -28,7 +29,7 @@ export const compiler = (configFilePath: string) => {
     undefined,
     undefined,
     {
-      before: [ transformerFactory ],
+      before: [ instrumentTransformerFactory(collector)],
       after: [],
       afterDeclarations: [],
     }

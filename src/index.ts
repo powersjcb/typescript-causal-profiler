@@ -2,5 +2,10 @@
 
 
 import {compiler} from './compiler';
+import {StatsCollector} from './lib/instrumentation';
 
-compiler('./tsconfig.json')
+const collector = new StatsCollector()
+
+compiler('./tsconfig.json', collector)
+
+console.log(collector.getReferences())
