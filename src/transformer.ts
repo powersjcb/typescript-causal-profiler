@@ -19,11 +19,9 @@ export const instrumentTransformerFactory = (collector: StatsCollector) => (cont
         const replacement = replacements[referenceFor(node)]
         if (replacement) {
           delete replacements[referenceFor(node)]
-          ts.visitEachChild(replacement, replacer, context)
-          return replacement;
+          return ts.visitEachChild(replacement, replacer, context)
         }
-        ts.visitEachChild(node, replacer, context);
-        return node;
+        return ts.visitEachChild(node, replacer, context);
       }
       return ts.visitNode(sourceFile, replacer)
     },
